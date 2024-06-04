@@ -2,6 +2,18 @@ import React from "react"
 
 export default function NvvListTask({rederNvvListTasks}) {
     console.log(renderNvvListTasks);
+    //hàm xử lý khi sửa 
+    const nvvHandleEdit = (param) =>{
+        console.log("Click edit:",param);
+        onNvvTaskEdit(param)  //đẩy lên app thông qua props(onNvvTaskEdit)
+    }
+    //hàm xử lý xóa 
+    const nvvHandleDelete =(param)=>{
+        if(window.location.confirm('bạn chắc chắn muốn xóa không')){
+            onNvvTaskDelete(param) //đẩy dữ liệu xóa lên app.js
+        }
+        }
+    
 
     // render data
     let nvvElementTask = renderNvvListTasks.map((task, index)=> {
@@ -13,8 +25,12 @@ export default function NvvListTask({rederNvvListTasks}) {
                     <td>{task.nvv_taskName}</td>
                     <td>{task.nvv_level}</td>
                     <td>
-                        <button className='btn btn-success'>Edit</button>
-                        <button className='btn btn-đange> Remove'></button>
+                        <button className='btn btn-success'
+                        onClick={()=>nvvHandleEdit(task)}
+                        >Edit</button>
+                        <button className='btn btn-danger'> 
+                        onClick={()=>nvvHandleDelete(task)}
+                        Remove'</button>
                     </td>
                     
                 </tr>
