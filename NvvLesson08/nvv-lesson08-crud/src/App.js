@@ -39,8 +39,32 @@ if(data === null || data.length ===0){
 // sử dụng hàm useState để lưu trữ trạng thái dữ liệu
 const [nvvListTasks, setNvvListTasks] = useState(data);
 
-// Khi tvcListTasks thay đổi thì cập nhật lại localStorage
+// Khi nvvListTasks thay đổi thì cập nhật lại localStorage
 useEffect(()=>{
   localStorage.setItem("NvvK22CNT2DataTask", JSON.stringify(nvvListTasks));
 },[nvvListTasks]);
 export default App;
+const ptqHandleDelete = (param)=>{
+  let ptqResult = ptqListTasks.filter(x=>x.ptq_taskId != param.ptq_taskId);
+  setptqListTasks(ptqResult);
+}
+return (
+  <div className="container border">
+    <h1>Nguyễn Văn Vũ - K22CNT2</h1>
+    <hr />
+    <div>
+      {/* Danh sách list task  */}
+      <NvvListTask
+        rendernvvListTasks={nvvListTasks}
+        nvvTaskEdit={nvvHandleEdit}
+        nvvTaskDelete = {nvvHandleDelete}
+      />
+    </div>
+    <div>
+      <NvvAddEditAndDelete 
+          rendernvvTask = {nvvTask}
+          rendernvvIsAddOrEdit = {nvvIsAddOrEdit}
+          nvvOnSubmit={nvvHandleSubmit} />
+    </div>
+  </div>
+);
